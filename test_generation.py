@@ -630,7 +630,10 @@ def generate(model, opt):
                 None,
                 None,
             )
-
+            np.save(
+                os.path.join(str(Path(opt.eval_path).parent), "gen_samples_{i}.npy"),
+                gen,
+            )
         samples = torch.cat(samples, dim=0)
         ref = torch.cat(ref, dim=0)
 
