@@ -28,7 +28,7 @@ synsetid_to_cate = {
     '04090263': 'rifle', '04099429': 'rocket', '04225987': 'skateboard',
     '04256520': 'sofa', '04330267': 'stove', '04530566': 'vessel',
     '04554684': 'washer', '02992529': 'cellphone',
-    '02843684': 'birdhouse', '02871439': 'bookshelf',
+    '02843684': 'birdhouse', '02871439': 'bookshelf', '03202019': 'grape',
     # '02858304': 'boat', no boat in our dataset, merged into vessels
     # '02834778': 'bicycle', not in our taxonomy
 }

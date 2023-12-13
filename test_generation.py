@@ -687,9 +687,9 @@ def main(opt):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--dataroot", default="/workspace/dataset/ShapeNet/ShapeNetCore.v2.PC15k/"
+        "--dataroot", default="/workspace/dataset/ShapeNet/ShapeNetCore.v2.PC15k"
     )
-    parser.add_argument("--category", default="chair")
+    parser.add_argument("--category", default="grape")
 
     parser.add_argument("--batch_size", type=int, default=50, help="input batch size")
     parser.add_argument("--workers", type=int, default=16, help="workers")
@@ -698,7 +698,7 @@ def parse_args():
     )
 
     parser.add_argument("--generate", default=True)
-    parser.add_argument("--eval_gen", default=True)
+    parser.add_argument("--eval_gen", default=False)
 
     parser.add_argument("--nc", default=3)
     parser.add_argument("--npoints", default=2048)
@@ -718,7 +718,7 @@ def parse_args():
 
     parser.add_argument(
         "--model",
-        default="",
+        default="output/train_generation/2023-12-12-18-29-16/epoch_9099.pth",
         required=True,
         help="path to model (to continue training)",
     )

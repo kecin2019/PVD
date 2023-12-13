@@ -1025,7 +1025,7 @@ def parse_args():
     parser.add_argument(
         "--dataroot", default="/workspace/dataset/ShapeNet/ShapeNetCore.v2.PC15k/"
     )
-    parser.add_argument("--category", default="chair")
+    parser.add_argument("--category", default="grape")
 
     parser.add_argument("--bs", type=int, default=16, help="input batch size")
     parser.add_argument("--workers", type=int, default=16, help="workers")
