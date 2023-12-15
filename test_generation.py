@@ -718,7 +718,7 @@ def parse_args():
     parser.add_argument(
         "--model",
         default="output/train_generation/2023-12-12-18-29-16/epoch_9099.pth",
-        required=True,
+        # required=True,
         help="path to model (to continue training)",
     )
 

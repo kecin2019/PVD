@@ -1025,7 +1025,7 @@ def parse_args():
     parser.add_argument(
         "--dataroot", default="/workspace/dataset/ShapeNet/ShapeNetCore.v2.PC15k/"
     )
-    parser.add_argument("--category", default="grape")
+    parser.add_argument("--category", default="grape15000")
 
     parser.add_argument("--bs", type=int, default=16, help="input batch size")
     parser.add_argument("--workers", type=int, default=16, help="workers")
@@ -1034,7 +1034,7 @@ def parse_args():
     )
 
     parser.add_argument("--nc", default=3)
-    parser.add_argument("--npoints", default=2048)
+    parser.add_argument("--npoints", default=10000)
     """model"""
     parser.add_argument("--beta_start", default=0.0001)
     parser.add_argument("--beta_end", default=0.02)
