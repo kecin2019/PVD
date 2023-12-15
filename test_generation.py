@@ -630,10 +630,6 @@ def generate(model, opt):
                 None,
                 None,
             )
-            np.save(
-                os.path.join(str(Path(opt.eval_path).parent), "gen_samples_{i}.npy"),
-                gen,
-            )
         samples = torch.cat(samples, dim=0)
         ref = torch.cat(ref, dim=0)
 
@@ -704,7 +700,7 @@ def parse_args():
     parser.add_argument("--eval_gen", default=False)
 
     parser.add_argument("--nc", default=3)
-    parser.add_argument("--npoints", default=2048)
+    parser.add_argument("--npoints", default=15000)
     """model"""
     parser.add_argument("--beta_start", default=0.0001)
     parser.add_argument("--beta_end", default=0.02)
