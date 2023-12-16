@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 # 设置保存路径
-file_path = "output/test_generation/2023-12-16-11-08-55/syn/samples"
+file_path = "output/test_generation/2023-12-16-11-33-41/syn/samples"
 
 # 加载PTH文件
 tensor = torch.load("%s.pth" % (file_path))

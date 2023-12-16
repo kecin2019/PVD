@@ -697,7 +697,7 @@ def parse_args():
     )
 
     parser.add_argument("--generate", default=True)
-    parser.add_argument("--eval_gen", default=True)
+    parser.add_argument("--eval_gen", default=False)
 
     parser.add_argument("--nc", default=3)
     parser.add_argument("--npoints", default=5000)
