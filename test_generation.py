@@ -688,7 +688,7 @@ def parse_args():
     parser.add_argument(
         "--dataroot", default="/workspace/dataset/ShapeNet/ShapeNetCore.v2.PC15k"
     )
-    parser.add_argument("--category", default="grape")
+    parser.add_argument("--category", default="grape3")
 
     parser.add_argument("--batch_size", type=int, default=50, help="input batch size")
     parser.add_argument("--workers", type=int, default=16, help="workers")
@@ -697,10 +697,10 @@ def parse_args():
     )
 
     parser.add_argument("--generate", default=True)
-    parser.add_argument("--eval_gen", default=False)
+    parser.add_argument("--eval_gen", default=True)
 
     parser.add_argument("--nc", default=3)
-    parser.add_argument("--npoints", default=15000)
+    parser.add_argument("--npoints", default=5000)
     """model"""
     parser.add_argument("--beta_start", default=0.0001)
     parser.add_argument("--beta_end", default=0.02)
@@ -717,7 +717,7 @@ def parse_args():
 
     parser.add_argument(
         "--model",
-        default="output/train_generation/2023-12-12-18-29-16/epoch_9099.pth",
+        default="output/train_generation/2023-12-15-20-42-09/epoch_4999.pth",
         # required=True,
         help="path to model (to continue training)",
     )

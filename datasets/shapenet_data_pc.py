@@ -66,8 +66,9 @@ synsetid_to_cate = {
     "02843684": "birdhouse",
     "02871439": "bookshelf",
     "03202019": "grape",  # NOTE: 更新前葡萄数据
-    "03201214": "grape2",  # NOTE: 更新后葡萄数据
-    "03202023": "grape15000",  # NOTE: 降采样后葡萄数据
+    "03201214": "grape2",  # NOTE: 更新后归一化葡萄数据
+    "03201215": "grape3",  # NOTE: 降采样未归一化葡萄数据
+    "03202023": "grape15000",  # NOTE: 降采样归一化葡萄数据
     # '02858304': 'boat', no boat in our dataset, merged into vessels
     # '02834778': 'bicycle', not in our taxonomy
 }
