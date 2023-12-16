@@ -6,7 +6,7 @@ import numpy as np
 file_path = "output/test_generation/2023-12-16-11-33-41/syn/samples"
 
 # 加载PTH文件
-tensor = torch.load("%s.pth" % (file_path))
+tensor = torch.load("%s.pth" % file_path)
 
 # 保存为npy文件
 np.save("%s.npy" % file_path, tensor.numpy())
