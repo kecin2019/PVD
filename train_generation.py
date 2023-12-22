@@ -374,20 +374,28 @@ class GaussianDiffusion:
         keep_running=False,
     ):
         """
-        Generate samples, returning intermediate images
-        Useful for visualizing how denoised images evolve over time
+        生成样本，返回中间图像
+        有用于可视化去噪图像如何随时间演变
         Args:
-          repeat_noise_steps (int): Number of denoising timesteps in which the same noise
-            is used across the batch. If >= 0, the initial noise is the same for all batch elemements.
+          repeat_noise_steps (int): 使用相同噪声的去噪时间步数
+            如果 >= 0，初始噪声适用于所有批量元素。
         """
+        # 断言形状是一个元组或列表
         assert isinstance(shape, (tuple, list))
 
+        # 设置总步数
         total_steps = self.num_timesteps if not keep_running else len(self.betas)
 
+        # 生成初始噪声图像
         img_t = noise_fn(size=shape, dtype=torch.float, device=device)
         imgs = [img_t]
+
+        # 从后到前进行时间步循环
         for t in reversed(range(0, total_steps)):
+            # 创建当前时间步的张量
             t_ = torch.empty(shape[0], dtype=torch.int64, device=device).fill_(t)
+
+            # 使用去噪函数生成下一个图像
             img_t = self.p_sample(
                 denoise_fn=denoise_fn,
                 data=img_t,
@@ -396,9 +404,12 @@ class GaussianDiffusion:
                 clip_denoised=clip_denoised,
                 return_pred_xstart=False,
             )
+
+            # 如果当前时间步是指定的频率或最后一个时间步，则将图像添加到列表中
             if t % freq == 0 or t == total_steps - 1:
                 imgs.append(img_t)
 
+        # 断言最后一个图像的形状与给定形状相同
         assert imgs[-1].shape == shape
         return imgs
 

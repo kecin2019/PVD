@@ -198,7 +198,7 @@ class Uniform15KPC(Dataset):
         self.test_points = self.all_points[:, 10000:]
 
         self.tr_sample_size = min(10000, tr_sample_size)
-        self.te_sample_size = min(5000, te_sample_size)
+        self.te_sample_size = max(5000, te_sample_size)
         print("Total number of data:%d" % len(self.train_points))
         print(
             "Min number of points: (train)%d (test)%d"
