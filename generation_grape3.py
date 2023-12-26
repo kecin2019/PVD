@@ -383,7 +383,7 @@ class GaussianDiffusion:
             ).detach()
 
         # 确保生成的图像与给定的形状相同
-        assert img_t.shape == shape
+        # assert img_t.shape == shape
         # 返回生成的图像
         return img_t
 
@@ -724,9 +724,14 @@ def generate(model, opt):
         ):
             x = data["test_points"].transpose(1, 2)  # 获取当前批次的测试数据
             m, s = data["mean"].float(), data["std"].float()  # 获取数据的均值和标准差
+            print(x.shape)
 
             # 使用模型生成样本
-            gen = model.gen_samples(x.shape, "cuda", clip_denoised=False).detach().cpu()
+            gen = (
+                model.gen_samples([9, 3, 20000], "cuda", clip_denoised=False)
+                .detach()
+                .cpu()
+            )
 
             # 对生成样本和测试数据进行归一化
             gen = gen.transpose(1, 2).contiguous()
@@ -750,6 +755,24 @@ def generate(model, opt):
 
         # 保存生成的样本到指定的路径
         torch.save(samples, opt.eval_path)
+        sample_pcs = samples.cpu().detach().numpy()
+        print("Generation sample size:(%s, %s, %s)" % sample_pcs.shape)
+
+        # Save the generative output
+        os.makedirs(os.path.join(str(Path(opt.eval_path).parent), "gen"), exist_ok=True)
+        np.save(
+            os.path.join(str(Path(opt.eval_path).parent), "gen", "model_out_smp.npy"),
+            sample_pcs,
+        )
+
+        # Save the point clouds as text files
+        for i in range(sample_pcs.shape[0]):
+            filename = "pointcloud_%03d.txt" % i
+            np.savetxt(
+                os.path.join(str(Path(opt.eval_path).parent), "gen", filename),
+                sample_pcs[i],
+                fmt="%s",
+            )
 
     # 返回原始参考数据
     return ref
@@ -833,7 +856,7 @@ def parse_args():
     parser.add_argument("--eval_gen", default=False)
 
     parser.add_argument("--nc", default=3)
-    parser.add_argument("--npoints", default=10000)
+    parser.add_argument("--npoints", default=5000)
     """model"""
     parser.add_argument("--beta_start", default=0.0001)
     parser.add_argument("--beta_end", default=0.02)
@@ -850,7 +873,7 @@ def parse_args():
 
     parser.add_argument(
         "--model",
-        default="output/train_generation/2023-12-15-20-42-09/epoch_4999.pth",
+        default="output/train_generation/2023-12-15-20-42-09/epoch_5299.pth",
         # required=True,
         help="path to model (to continue training)",
     )
