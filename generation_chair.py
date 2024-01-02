@@ -383,7 +383,7 @@ class GaussianDiffusion:
             ).detach()
 
         # 确保生成的图像与给定的形状相同
-        assert img_t.shape == shape
+        # assert img_t.shape == shape
         # 返回生成的图像
         return img_t
 
@@ -727,7 +727,11 @@ def generate(model, opt):
             print(x.shape)
 
             # 使用模型生成样本
-            gen = model.gen_samples(x.shape, "cuda", clip_denoised=False).detach().cpu()
+            gen = (
+                model.gen_samples([40, 3, 20000], "cuda", clip_denoised=False)
+                .detach()
+                .cpu()
+            )
 
             # 对生成样本和测试数据进行归一化
             gen = gen.transpose(1, 2).contiguous()
@@ -751,6 +755,24 @@ def generate(model, opt):
 
         # 保存生成的样本到指定的路径
         torch.save(samples, opt.eval_path)
+        sample_pcs = samples.cpu().detach().numpy()
+        print("Generation sample size:(%s, %s, %s)" % sample_pcs.shape)
+
+        # Save the generative output
+        os.makedirs(os.path.join(str(Path(opt.eval_path).parent), "gen"), exist_ok=True)
+        np.save(
+            os.path.join(str(Path(opt.eval_path).parent), "gen", "model_out_smp.npy"),
+            sample_pcs,
+        )
+
+        # Save the point clouds as text files
+        for i in range(sample_pcs.shape[0]):
+            filename = "pointcloud_%03d.txt" % i
+            np.savetxt(
+                os.path.join(str(Path(opt.eval_path).parent), "gen", filename),
+                sample_pcs[i],
+                fmt="%s",
+            )
 
     # 返回原始参考数据
     return ref

@@ -728,7 +728,7 @@ def generate(model, opt):
 
             # 使用模型生成样本
             gen = (
-                model.gen_samples([9, 3, 20000], "cuda", clip_denoised=False)
+                model.gen_samples([9, 3, 5000], "cuda", clip_denoised=False)
                 .detach()
                 .cpu()
             )
@@ -882,7 +882,9 @@ def parse_args():
 
     parser.add_argument("--eval_path", default="")
 
-    parser.add_argument("--manualSeed", default=42, type=int, help="random seed")
+    parser.add_argument(
+        "--manualSeed", default=random.randint(1, 10000), type=int, help="random seed"
+    )
 
     parser.add_argument(
         "--gpu", type=int, default=0, metavar="S", help="gpu id (default: 0)"
